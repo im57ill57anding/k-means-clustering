@@ -3,7 +3,6 @@ import re
 from src.frequency import idf, tf
 from src.clustering import k_means_clustering
 
-
 def pre_calculation(data: str) -> list:
     deleted_symbols: str = str(re.split(', |\\|_|-|!', data.lower()))
     list_for_data: list = deleted_symbols.split(' ')
@@ -53,6 +52,9 @@ def calculate_k_means():
     dict_for_data: dict = response[0]
     list_for_data: list = response[1]
     dataset: list = []
+
+    tf.compute_term_frequency(dict_for_data, list_for_data)
+    idf.compute_inverse_data_frequency(list_for_data)
 
     for key, value in dict_for_data.items():
         dataset.append([value, len(key)])
